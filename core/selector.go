@@ -2,6 +2,7 @@ package core
 
 import (
 	"errors"
+	"github.com/Yuzuki616/V2bX/limiter"
 	"sync"
 
 	"github.com/Yuzuki616/V2bX/api/panel"
@@ -71,6 +72,15 @@ func (s *Selector) AddUsers(p *AddUsersParams) (added int, err error) {
 		return 0, errors.New("the node is not have")
 	}
 	return s.cores[t.(int)].AddUsers(p)
+}
+
+func (s *Selector) AddUserSpeedLimit(l *limiter.Limiter, tag string, user *panel.UserInfo, speedLimit int, expire int64) error {
+	t, e := s.nodes.Load(tag)
+	if !e {
+		return errors.New("the node is not have")
+	}
+	return s.cores[t.(int)].AddUserSpeedLimit(l, tag, user, speedLimit, expire)
+
 }
 
 func (s *Selector) GetUserTraffic(tag, uuid string, reset bool) (up int64, down int64) {

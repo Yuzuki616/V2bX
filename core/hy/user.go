@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/Yuzuki616/V2bX/api/panel"
 	"github.com/Yuzuki616/V2bX/core"
+	"github.com/Yuzuki616/V2bX/limiter"
 )
 
 func (h *Hy) AddUsers(p *core.AddUsersParams) (int, error) {
@@ -42,4 +43,8 @@ func (h *Hy) DelUsers(users []panel.UserInfo, tag string) error {
 		s.counter.Delete(base64.StdEncoding.EncodeToString([]byte(users[i].Uuid)))
 	}
 	return nil
+}
+
+func (h *Hy) AddUserSpeedLimit(l *limiter.Limiter, tag string, user *panel.UserInfo, speedLimit int, expire int64) error {
+	return l.AddDynamicSpeedLimit(tag, user, speedLimit, expire)
 }

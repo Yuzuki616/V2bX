@@ -24,6 +24,18 @@ func (c *Controller) initTask() {
 	_ = c.nodeInfoMonitorPeriodic.Start(false)
 	log.WithField("tag", c.Tag).Info("Start report node status")
 	_ = c.userReportPeriodic.Start(false)
+	if c.LimitConfig.EnableDynamicSpeedLimit {
+		// Check dynamic speed limit task
+		c.dynamicSpeedLimitPeriodic = &task.Task{
+			Interval: time.Duration(c.LimitConfig.DynamicSpeedLimitConfig.Periodic) * time.Second,
+			Execute:  c.dynamicSpeedLimit,
+		}
+		go func() {
+			time.Sleep(time.Duration(c.LimitConfig.DynamicSpeedLimitConfig.Periodic) * time.Second)
+			_ = c.dynamicSpeedLimitPeriodic.Start(false)
+		}()
+		log.Printf("[%s: %d] Start dynamic speed limit", c.nodeInfo.Type, c.nodeInfo.Id)
+	}
 	if c.nodeInfo.Tls {
 		switch c.CertConfig.CertMode {
 		case "reality", "none", "":

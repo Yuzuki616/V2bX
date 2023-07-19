@@ -14,6 +14,7 @@ import (
 
 type Controller struct {
 	server                    vCore.Core
+	limiter                   *limiter.Limiter
 	apiClient                 *panel.Client
 	nodeInfo                  *panel.NodeInfo
 	Tag                       string
@@ -56,9 +57,9 @@ func (c *Controller) Start() error {
 	c.Tag = c.buildNodeTag()
 
 	// add limiter
-	l := limiter.AddLimiter(c.Tag, &c.LimitConfig, c.userList)
+	c.limiter = limiter.AddLimiter(c.Tag, &c.LimitConfig, c.userList)
 	// add rule limiter
-	if err = l.UpdateRule(c.nodeInfo.Rules); err != nil {
+	if err = c.limiter.UpdateRule(c.nodeInfo.Rules); err != nil {
 		return fmt.Errorf("update rule error: %s", err)
 	}
 	if c.nodeInfo.Tls || c.nodeInfo.Type == "hysteria" {
@@ -75,6 +76,7 @@ func (c *Controller) Start() error {
 	added, err := c.server.AddUsers(&vCore.AddUsersParams{
 		Tag:      c.Tag,
 		Config:   c.ControllerConfig,
+		Limiter:  c.limiter,
 		UserInfo: c.userList,
 		NodeInfo: c.nodeInfo,
 	})

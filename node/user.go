@@ -5,6 +5,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"runtime"
 	"strconv"
+	"time"
 )
 
 func (c *Controller) reportUserTrafficTask() (err error) {
@@ -64,4 +65,23 @@ func compareUserList(old, new []panel.UserInfo) (deleted, added []panel.UserInfo
 		}
 	}
 	return deleted, added
+}
+
+func (c *Controller) dynamicSpeedLimit() error {
+	if c.LimitConfig.EnableDynamicSpeedLimit {
+		for i := range c.userList {
+			up, down := c.server.GetUserTraffic(c.Tag, c.userList[i].Uuid, false)
+			if c.userList[i].Traffic+down+up/1024/1024 > c.LimitConfig.DynamicSpeedLimitConfig.Traffic {
+				err := c.server.AddUserSpeedLimit(c.limiter, c.Tag,
+					&c.userList[i],
+					c.LimitConfig.DynamicSpeedLimitConfig.SpeedLimit,
+					time.Now().Add(time.Second*time.Duration(c.LimitConfig.DynamicSpeedLimitConfig.ExpireTime)).Unix())
+				if err != nil {
+					log.Print(err)
+				}
+			}
+			c.userList[i].Traffic = 0
+		}
+	}
+	return nil
 }

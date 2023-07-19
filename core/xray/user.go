@@ -3,6 +3,7 @@ package xray
 import (
 	"context"
 	"fmt"
+	"github.com/Yuzuki616/V2bX/limiter"
 
 	"github.com/Yuzuki616/V2bX/api/panel"
 	"github.com/Yuzuki616/V2bX/common/format"
@@ -104,4 +105,8 @@ func (c *Core) AddUsers(p *vCore.AddUsersParams) (added int, err error) {
 		}
 	}
 	return len(users), nil
+}
+
+func (c *Core) AddUserSpeedLimit(l *limiter.Limiter, tag string, user *panel.UserInfo, speedLimit int, expire int64) error {
+	return l.AddDynamicSpeedLimit(tag, user, speedLimit, expire)
 }
