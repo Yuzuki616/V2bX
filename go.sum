@@ -71,8 +71,8 @@ github.com/RackSec/srslog v0.0.0-20180709174129-a4725f04ec91 h1:vX+gnvBc56EbWYrm
 github.com/RackSec/srslog v0.0.0-20180709174129-a4725f04ec91/go.mod h1:cDLGBht23g0XQdLjzn6xOGXDkLK182YfINAaZEQLCHQ=
 github.com/Yuzuki616/hysteria/core v0.0.0-20230722103310-05508b7e5490 h1:OqS0ywNFR0fEWteLyTcexUNkpdb3vTl5EdMn9gMJMCc=
 github.com/Yuzuki616/hysteria/core v0.0.0-20230722103310-05508b7e5490/go.mod h1:Byg39a10tXQ6ysRz5r59YhVMUKgXAThI+0/LcVr+WOE=
-github.com/Yuzuki616/quic-go v0.34.1 h1:9Is+Dofzn6qJ9a9t4Ixe4oX7Cb4LU7u4zDozVB8DBDY=
-github.com/Yuzuki616/quic-go v0.34.1/go.mod h1:089qZpsXn7CL8kE7G2HurF0bLiZnzQdRIrT7PM0MMQs=
+github.com/Yuzuki616/quic-go v0.36.2 h1:b0nZe6FeDx/1PNBdFITB6vhL++hJByVDbi5Ju+x08ws=
+github.com/Yuzuki616/quic-go v0.36.2/go.mod h1:eRd+OKRyJheQlA2VGUOZvTD11ytpJ/n3qy0i2rqX7pc=
 github.com/akamai/AkamaiOPEN-edgegrid-golang v1.2.2 h1:F1j7z+/DKEsYqZNoxC6wvfmaiDneLsQOFQmuq9NADSY=
 github.com/akamai/AkamaiOPEN-edgegrid-golang v1.2.2/go.mod h1:QlXr/TrICfQ/ANa76sLeQyhAJyNR9sEcfNuZBkY9jgY=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
