@@ -1,5 +1,5 @@
 # V2bX
-
+**项目转移至[V2bX](https://github.com/InazumaV/V2bX)，此仓库不再维护**
 [![](https://img.shields.io/badge/TgChat-%E4%BA%A4%E6%B5%81%E7%BE%A4-blue)](https://t.me/YuzukiProjects)
 
 A V2board node server based on multi core, modified from XrayR.  
