@@ -170,6 +170,7 @@ func (c *Controller) nodeInfoMonitor() (err error) {
 		_, err = c.server.AddUsers(&vCore.AddUsersParams{
 			Tag:      c.tag,
 			Config:   c.ControllerConfig,
+			NodeInfo: c.node
 			UserInfo: added,
 		})
 		if err != nil {
