@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/Yuzuki616/hysteria/core v0.0.0-20230722103310-05508b7e5490
-	github.com/Yuzuki616/quic-go v0.34.1
+	github.com/Yuzuki616/quic-go v0.36.2
 	github.com/beevik/ntp v1.2.0
 	github.com/folbricht/routedns v0.1.20
 	github.com/fsnotify/fsnotify v1.6.0
